@@ -37,3 +37,4 @@ animalCollections.push(newAnimal)
 
 console.log(animals)
 console.log(animalCollections[0].sound)
+
