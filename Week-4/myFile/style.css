@@ -1,0 +1,29 @@
+body{
+    background-color: rgb(39, 38, 38);
+}
+
+div {
+    width: 400px;
+    margin: auto;
+}
+
+h1 {
+    text-align: center;
+    font-size: 50px;
+    color: lime;
+    text-decoration: underline;
+}
+
+p {
+    font-size: 30px;
+    color: white;
+    text-align: center;
+}
+
+.name {
+    color: yellow;
+}
+
+.job {
+    color: orangered;
+}
