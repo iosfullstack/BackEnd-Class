@@ -4,9 +4,9 @@ const path = require(`path`)
 const app = express()
 app.use(express.static(`./myFile`))
 
-// app.get(`/`, (req, res) => {
-//     res.status(200).sendFile(path.resolve(__dirname, `./myFile/index.html`))
-// })
+app.get(`/`, (req, res) => {
+    res.status(200).sendFile(path.resolve(__dirname, `./myFile/index.html`))
+})
 
 
 app.listen(50000, () => {
