@@ -9,7 +9,7 @@ const createFriend =(req, res)=>{
 
 const getFriend =(req, res)=>{
     const id = req.params.personId
-    const onePerson = data.find((person) => person.id === id )
+    const onePerson = data.find((person) => person.id == id )
     res.status(200).send(onePerson)
 }
 
@@ -22,7 +22,7 @@ const getFriends =(req, res)=>{
 const updateFriend =(req, res)=>{
     const payLoad = req.body
     const id = req.params.personId
-    const onePerson = data.find((person) => person.id === id )
+    const onePerson = data.find((person) => person.id == id )
     onePerson.name = payLoad.name
     res.status(200).send(onePerson)
 }
