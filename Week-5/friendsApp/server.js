@@ -17,8 +17,9 @@ app.get('/', (req, res) =>{
 app.use(`/data`, router)
 
 
-connectDb()
+// connectDb()
 
-app.listen(5000, ()=> {
+app.listen(5000, async ()=> {
+    await connectDb()
     console.log('Server is up and running')
 })

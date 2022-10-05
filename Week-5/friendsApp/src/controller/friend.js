@@ -1,10 +1,24 @@
 const data = require ('../model/data')
+const FriendsModel = require(`../model/friendsSchema`)
 
-const createFriend =(req, res)=>{
-    res.status(200).send("data")
-    const person = req.body
-    data.push(person)
-    res.status(201).json(person)
+const createFriend = async (req, res)=>{
+    // res.status(200).send("data")
+    // const person = req.body
+    // data.push(person)
+    // res.status(201).json(person)
+
+    // Mongoose Method
+
+    const { name, age } =req.body
+    const small_name = name.toLowerCase()
+    try {
+
+        const newFriend = await FriendsModel.create({name: small_name, age})
+        newFriend.save()
+        res.status(201).json({success: true, message: "Successfully Created", data: newFriend})
+    } catch (error){
+        res.status(400).json({success: false, message: "Operation Failed"})
+    }
 }
 
 const getFriend =(req, res)=>{
