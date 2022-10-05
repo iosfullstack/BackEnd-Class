@@ -1,7 +1,6 @@
 const sayHi =(req, res, next)=>{
     const name = `try`
     console.log(`Hi ${name}`)
-    
     next()
     }
     
