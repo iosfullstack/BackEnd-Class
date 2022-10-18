@@ -16,6 +16,7 @@ app.get('/', (req, res) =>{
     res.status(200).send('Homepage')
 })
 
+// app.use(`/friends`, router)
 app.use(`/data`, router)
 
 const port = process.env.PORT

@@ -6,12 +6,14 @@ const {
     getFriends,
     updateFriend,
     deleteFriend,
-    search
+    search,
+    signIn
 } = require(`../controller/friend`)
 
 const router = express.Router()
 
 router.get(`/`, getFriends)
+router.post(`/login`, signIn)
 router.post(`/`, createFriend)
 router.get(`/:personId`, getFriend)
 router.put(`/:personId`, updateFriend)
