@@ -1,6 +1,9 @@
 const data = require ('../model/data')
 const FriendsModel = require(`../model/friendsSchema`)
 const bcrypt = require(`bcrypt`)
+const jwt = require(`jsonwebtoken`)
+const dotenv = require(`dotenv`)
+dotenv.config()
 const createFriend = async (req, res)=> {
     // res.status(200).send("data")
     // const person = req.body
@@ -52,10 +55,12 @@ const signIn = async (req, res) => {
         if (!friends) return res.status(404).json({success: false, message: "your email or password is incorrect" })
         const isValidPassword = await bcrypt.compare(password, friends.password)
         if (!isValidPassword) return res.status(404).json({success: false, message: "invalid email or password"})
+        const token = await jwt.sign({_id: friends._id, name: friends.name, age: friends.age}, process.env.JWT_SECRET)
             res.status(200).json({
                 success:true,
                 message: `friend logged in`,
-                data: friends
+                data: friends,
+                token: token
             })
     } catch (error) {
         res.status(400).json({

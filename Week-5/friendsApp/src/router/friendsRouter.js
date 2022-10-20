@@ -12,7 +12,9 @@ const {
 
 const router = express.Router()
 
-router.get(`/`, getFriends)
+const verifyToken = require(`../middleware/verifyToken`)
+
+router.get(`/`, verifyToken, getFriends)
 router.post(`/login`, signIn)
 router.post(`/`, createFriend)
 router.get(`/:personId`, getFriend)
