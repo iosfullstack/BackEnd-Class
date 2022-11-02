@@ -9,6 +9,9 @@ const friendsSchema = new mongoose.Schema(
         age: {
             type: String,
         },
+        avatar: {
+            type: String,
+        },
         phoneNumber: {
             type: String,
             required: true

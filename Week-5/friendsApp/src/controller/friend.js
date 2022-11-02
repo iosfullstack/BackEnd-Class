@@ -3,6 +3,8 @@ const FriendsModel = require(`../model/friendsSchema`)
 const bcrypt = require(`bcrypt`)
 const jwt = require(`jsonwebtoken`)
 const dotenv = require(`dotenv`)
+const cloudinary = require('../Util/cloudinary')
+const fs = require('fs')
 dotenv.config()
 const createFriend = async (req, res)=> {
     // res.status(200).send("data")
@@ -141,6 +143,37 @@ const search = async (req, res)=>{
     }
 }
 
+const uploadAvatar = async (req, res) => {
+
+    const {_id} = req.user
+    
+    const uploader = async (path) => await cloudinary.uploads(path , 'friend_avatars')
+    let url;
+ 
+    const file = req.file
+ 
+    const {path} = file
+    const newPath = await uploader(path)
+ 
+    url = newPath.url
+ 
+    fs.unlinkSync(path)
+              
+ 
+    let friend = await FriendsModel.findOne({_id: _id}, {password: 0})
+ 
+    friend.avatar = url.toString()
+ 
+    await friend.save()
+ 
+    res.status(200).json({
+     success: true,
+     msg: "successfully uploaded an image for the friend",
+     data: friend
+ })
+ 
+ }
+
 module.exports ={
     createFriend,
     getFriend,
@@ -148,5 +181,6 @@ module.exports ={
     updateFriend,
     deleteFriend,
     search,
-    signIn
+    signIn,
+    uploadAvatar
 }
