@@ -6,6 +6,9 @@ const dotenv = require(`dotenv`)
 const cloudinary = require('../Util/cloudinary')
 const fs = require('fs')
 dotenv.config()
+
+const {registerFriendSchema} = require('../validations/friendValidation')
+
 const createFriend = async (req, res)=> {
     // res.status(200).send("data")
     // const person = req.body
@@ -16,7 +19,11 @@ const createFriend = async (req, res)=> {
 
     // No two friends must have the same email
     // encrypt passwords
-
+    const {error} = await registerFriendSchema(req.body)
+    if (error) return res.status(400).json ({
+        success: false,
+        message: error.details[0].message
+    })
     const { name, age, phoneNumber, email, password } = req.body
 
     const friend = await FriendsModel.findOne({email})
